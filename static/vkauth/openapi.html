@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Open API flapps.ru</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<script src="static_media/vkauth/openapi_lib.js" charset="windows-1251"></script>
+<script src="static_media/vkauth/openapi_code.js" charset="windows-1251"></script>
+</head>
+<body>
+<!-- vk_api_transport необходим для работы с Open API  -->
+<div id="vk_api_transport"></div>
+<!-- кнопка входа  -->
+<a href="#" id="vk_login" onclick="loginOpenAPI()">Войти</a>
+<!-- блок, в котором будет выводиться информация о пользователе  -->
+<div id="userinfo">
+    <a href="#" id="openapi_userlink"><img src="" id="openapi_userphoto" alt="img" /></a>
+</div>
+ 
+<div id="message">Привет, <span id="openapi_user">Пользователь!</span></div>
+ 
+<!-- ссылка для выхода  -->
+<div id="logout"><a href="#" onclick="doLogout()">Выйти</a></div>
+<a href="http://flapps.ru/forum">Форум Вконтакте API</a>
+ 
+ 
+  </body>
+</html>

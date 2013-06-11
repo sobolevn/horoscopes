@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Open API sample page</title>
+    <base href="//127.0.0.1:8000/" target="_blank" />
+    <!--[if lte IE 6]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(//vk.com/css/ie.css); /* ]]> */</style><![endif]-->
+    <!--[if IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(//vk.com/css/ie7.css); /* ]]> */</style><![endif]-->
+    <!--[if gte IE 8]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(//vk.com/css/ie8.css); /* ]]> */</style><![endif]-->
+    <script type="text/javascript">if (!window.vk) window.vk = {loginscheme: 'https', ip_h: 'b2c94302976459cb80'};</script>
+    <script src="//vk.com/js/common.js"></script>
+    <script src="static_media/durovat/openapi_sample.js"></script>
+  </head>
+  <body>
+    <div id="vk_api_transport"></div>
+    <script type="text/javascript">
+      window.vkAsyncInit = function() {
+        VK.Observer.subscribe('auth.login', function(response) {
+          loginOpenAPI();
+          console.log('logIN');
+        });
+        VK.Observer.subscribe('auth.logout', function() {
+          //console.log('logout');
+        });
+        VK.Observer.subscribe('auth.statusChange', function(response) {
+          //console.log('statusChange');
+        });
+        VK.Observer.subscribe('auth.sessionChange', function(r) {
+          //console.log('sessionChange');
+        });
+        VK.init({
+          apiId: 3702495
+        });
+      };
+      setTimeout(function() {
+        var el = document.createElement('script');
+        el.type = 'text/javascript';
+        el.src = '//vk.com/js/api/openapi.js?3';
+        el.async = true;
+        document.getElementById('vk_api_transport').appendChild(el);
+      }, 0);
+    </script>
+    <div id="openapi_header">
+      <div id="openapi_block">
+        <div id="openapi_userpic">
+          <a href="#" id="openapi_userlink"><img src="//vk.com/images/question_c.gif" id="openapi_userphoto" /></a>
+        </div>
+        <div id="openapi_profile">
+          <div id="openapi_greeting">Привет, <span id="openapi_user"></span></div>
+          <div id="openapi_actions"><span onclick="doLogout();" onmouseover="addClass(this, 'openapi_actions_hover');" onmouseout="removeClass(this, 'openapi_actions_hover');">Выход</span></div>
+        </div>
+      </div>
+      <div id="openapi_title">Пример стороннего сайта<p style="margin:3px 0px 0px; font-size: 11px;color:#CDD9E4">Использование <span style="color:#FFF">Open API</span> ВКонтакте</p></div>
+      <div style="clear:both;"></div>
+    </div>
+    <div id="openapi_wrap">
+      <div id="info">
+        <div class="bOpen">
+          <div class="flexHeader clearFix">
+            <div><h2 id="news_title"></h2></div>
+          </div>
+        </div>
+        <div>
+        <div id="logo"><a id="group_link" href="#"><img id="logo_img" src="//vk.com/images/question_100.gif" alt="VK team" /></a></div>
+        <div id="news">
+          <div class="dataWrap"><div class='wikiText'>
+          </div></div>
+        </div>
+        </div>
+      </div>
+      <div id="friends">
+        <div class="bOpen">
+          <div class="flexHeader clearFix">
+            <div><h2>Друзья на сайте</h2></div>
+          </div>
+        </div>
+        <div id="friends_list"></div>
+        <div style="clear: left; padding-top: 10px;"></div>
+      </div>
+      <div id="comments">
+        <div class="bOpen">
+          <div class="flexHeader clearFix">
+            <div><h2>Комментарии</h2></div>
+          </div>
+        </div>
+        <div id="comments_list"></div>
+        <div style="clear: left;"></div>
+        <!--div id="blogaddcomment">
+          <div class="commentHead">
+            <h4>Ваш комментарий</h4>
+          </div>
+          <div id="progrWrapAdd"><img src="images/upload.gif" style="padding-top: 3px;" id="progrAdd"></div>
+          <div style="clear: both;">
+          <form id="addcomm" name="addcomm" method="POST" action="javascript: postComment()">
+            <input type="hidden" value="a_add_comment" name="act" id="act">
+            <textarea onkeypress="" cols="60" rows="7" id="comment" name="comment"></textarea>
+            <div style="color: #666666; margin: 5px 0px; display: none;" id="textWarn"></div>
+            <div>
+              <div class="addButton">
+                <div onclick="postComment();" style="margin: 0px;" onmouseover="btnOver(this);" onmouseout="btnOut(this);" class="button_wrap button_yes">
+                <div class="box_button">Добавить комментарий
+              </div>
+            </div>
+          </form>
+        </div-->
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <base href="//127.0.0.1:8000/"/>
+    <title>Open API sample page</title>
+    <script type="text/javascript">if (!window.vk) window.vk = {loginscheme: 'https', ip_h: '1cf1aadff2448ca2a2'};</script>
+    <script src="//vk.com/js/common.js"></script>
+    
+    <script src="static_media/durovat/lib.js"></script>
+  </head>
+  <body>
+<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+
+<div id="login_button" onclick="VK.Auth.login(authInfo);"></div>
+
+<script language="javascript">
+login();
+{% if not login_val %}
+VK.Auth.getLoginStatus(authInfo);
+{% else %}
+VK.Auth.getLoginStatus(authInfo2);
+{% endif %}
+VK.UI.button('login_button');
+</script>
+
+<div id="openapi_block">
+        <div id="openapi_userpic">
+          <a href="#" id="openapi_userlink"><img src="//vk.com/images/question_c.gif" id="openapi_userphoto" /></a>
+        </div>
+        <div id="openapi_profile">
+          <div id="openapi_greeting">Привет, <span id="openapi_user"></span></div>
+          <div id="openapi_actions"><span onclick="doLogout();" onmouseover="addClass(this, 'openapi_actions_hover');" onmouseout="removeClass(this, 'openapi_actions_hover');">Выход</span></div>
+        </div>
+</div>
+<script language="javascript">
+hide('openapi_block');
+</script>
+
+<form class="form2" action="/" method="post" id="form2">{% csrf_token %}
+<input type="hidden" placeholder="login_button" id="uid" name="uid"/>
+<input type="hidden" placeholder="login_button" id="img_src" name="img_src"/>
+<input type="hidden" placeholder="login_button" id="name" name="name"/>
+<input type="hidden" placeholder="login_button" id="sex" name="sex"/>
+<input type="hidden" placeholder="login_button" id="bdate" name="bdate"/>
+</form>
+
+      
+
+  </body>
+</html>
