@@ -17,7 +17,7 @@ def login(request):
         if request.method == 'GET':
             c = {}
             c.update(csrf(request))
-            return render_to_response('durovat/login.html', c)
+            return render_to_response('vk_login/login.html', c)
 
         else:
             print 'post'
@@ -32,7 +32,7 @@ def login(request):
                     u.save()
                     print 'saved' + u.uid
 
-                return render_to_response('durovat/login.html', c)
+                return render_to_response('vk_login/login.html', c)
             else:
                 return HttpResponse('error')
 
