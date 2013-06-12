@@ -1,8 +1,8 @@
 # -*- coding: utf8 -*-
 __author__ = 'sobolev'
 
-#from HoroscopeView.models import HoroscopeModel
-from statics import getSigns
+from HoroscopeView.models import HoroscopeModel
+from statics import *
 
 
 class Horoscope:
@@ -20,7 +20,7 @@ class Horoscope:
 
     def getModel(self):
         print 'd'
-        #return HoroscopeModel(description=self.description, sign=self.sign, start_date=self.start_date)
+        return HoroscopeModel(description=self.description, sign=self.sign, date=self.date)
 
     def getDueDate(self):
         sign = getSigns()

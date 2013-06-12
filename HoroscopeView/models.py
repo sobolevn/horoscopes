@@ -11,4 +11,4 @@ class User(models.Model):
 class HoroscopeModel(models.Model):
     description = models.CharField(max_length=1000)
     sign = models.CharField(max_length=20)
-    start_date = models.CharField(max_length=20)
+    date = models.CharField(max_length=20)
