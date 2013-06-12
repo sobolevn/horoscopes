@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 __author__ = 'sobolev'
 
-from datetime import date
+from datetime import date, timedelta
 
 def getSigns():
     """

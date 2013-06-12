@@ -20,21 +20,24 @@ def dateHandler(aDateString):
 
 feedparser.registerDateHandler(dateHandler)
 
+def getDate(parsed_date):
+    return date(parsed_date.tm_year, parsed_date.tm_mon, parsed_date.tm_mday)
+
 def getHoroscopesForSign(sign):
     parsed = feedparser.parse(_base_url + sign)
     horoscope_list = []
     for i in parsed.entries:
-        date = str(i.published_parsed.tm_mday) + '.' + str(i.published_parsed.tm_mon) + '.' + str(i.published_parsed.tm_year)
+        date = getDate(i.published_parsed)
         horoscope_list.append(Horoscope(i.fulltext, sign, date))
     return horoscope_list
 
-def getHoroscopesForSignAndDate(sign, date):
+def getHoroscopeForSignAndDate(sign, date):
     parsed = feedparser.parse(_base_url + sign)
-    horoscope_list = []
     for i in parsed.entries:
-        date = str(i.published_parsed.tm_mday) + '.' + str(i.published_parsed.tm_mon) + '.' + str(i.published_parsed.tm_year)
-        horoscope_list.append(Horoscope(i.fulltext, sign, date))
-    return horoscope_list
+        r_date = getDate(i.published_parsed)
+        print 'eq', r_date, date, (r_date == date)
+        if r_date == date:
+            return Horoscope(i.fulltext, sign, date)
 
 
 def getAllHoroscopes():
@@ -44,3 +47,4 @@ def getAllHoroscopes():
         all_horoscopes.update({sign: getHoroscopesForSign(sign)})
     return all_horoscopes
 
+#print getHoroscopeForSignAndDate('taurus', date.today())

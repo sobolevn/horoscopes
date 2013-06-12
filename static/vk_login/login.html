@@ -8,7 +8,7 @@
     <script type="text/javascript">if (!window.vk) window.vk = {loginscheme: 'https', ip_h: '1cf1aadff2448ca2a2'};</script>
     <script src="//vk.com/js/common.js"></script>
     
-    <script src="static_media/durovat/lib.js"></script>
+    <script src="static_media/vk_login/lib.js"></script>
   </head>
   <body>
 <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
@@ -37,6 +37,19 @@ VK.UI.button('login_button');
 <script language="javascript">
 hide('openapi_block');
 </script>
+
+<div id='date'>
+    <h1>Horoscopes for {{ date }}</h1>
+</div>
+
+<div id='horoscopes' class='horoscopes'>
+    {% for horoscope in horoscopes %}
+        <div class='horoscope_field'>
+        {{ horoscope.description }}
+        </div>
+        <br>
+    {% endfor %}
+</div>
 
 <form class="form2" action="/" method="post" id="form2">{% csrf_token %}
 <input type="hidden" placeholder="login_button" id="uid" name="uid"/>

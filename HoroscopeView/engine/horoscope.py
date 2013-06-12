@@ -2,8 +2,6 @@
 __author__ = 'sobolev'
 
 from HoroscopeView.models import HoroscopeModel
-from statics import *
-
 
 class Horoscope:
 
@@ -19,9 +17,9 @@ class Horoscope:
         self.date = date
 
     def getModel(self):
-        print 'd'
+        #print 'd'
         return HoroscopeModel(description=self.description, sign=self.sign, date=self.date)
 
-    def getDueDate(self):
-        sign = getSigns()
-        print sign.taurus
+
+def fromModel(model):
+    return Horoscope(model.description, model.sign, model.date)
