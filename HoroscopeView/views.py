@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
-from models import  User
+from models import User
 
 def login(request):
     """
@@ -13,7 +13,6 @@ def login(request):
     :return:
     """
     #t = get_template('page1.html')
-    global u
     if request:
         if request.method == 'GET':
             c = {}

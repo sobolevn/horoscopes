@@ -8,3 +8,7 @@ class User(models.Model):
     sex = models.IntegerField()
     bdate = models.CharField(max_length=30, default='undefined')
 
+class HoroscopeModel(models.Model):
+    description = models.CharField(max_length=1000)
+    sign = models.CharField(max_length=20)
+    start_date = models.CharField(max_length=20)
