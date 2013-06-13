@@ -7,8 +7,10 @@ from HoroscopeView import views
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', views.login),
-    (r'^static_media/(?P<path>.*)$',
+    url(r'^login$', views.login),
+        #(r'^$', views.handle_get_request),
+    url(r'^$', views.handle_get_request),
+    url(r'^static_media/(?P<path>.*)$',
      'django.views.static.serve', {'document_root': '/Users/sobolev/Documents/django/horoscopes/static'}),
     # url(r'^horoscopes/', include('horoscopes.foo.urls')),
 

@@ -14,7 +14,9 @@ function logoutOpenAPI() {
 }
 
 function done(res, status) {
+    alert('done ' + status + ' ' + res.responseText);
   if (status == "success") {
+      console.log(res);
   }
   else {
   }
@@ -47,7 +49,7 @@ function onGetInitData(data, csrf) {
     /* Insert user info */
     if (r.me) {
       ge('openapi_user').innerHTML = r.me.first_name + ' ' + r.me.last_name;
-      ge('openapi_userlink').href = '/id' + r.me.uid;
+      ge('openapi_userlink').href = 'http://vk.com/id' + r.me.uid;
       ge('openapi_userphoto').src = r.me.photo;
     }
     	hide('login_button');
@@ -56,7 +58,7 @@ function onGetInitData(data, csrf) {
         var data = { uid: r.me.uid, sex: r.me.sex, bdate: r.me.bdate, img_src: r.me.photo,
             name: fullName, 'csrfmiddlewaretoken': csrf};
 
-        var args = { type:"POST", url:"/", data:data, complete:done };
+        var args = { type:"POST", url:"/login", data:data, complete:done};
         $.ajax(args);
 
   } else {

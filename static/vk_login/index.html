@@ -17,9 +17,9 @@
 
 <script language="javascript">
 login();
-VK.Auth.getLoginStatus(function(response) {
-    authInfo(response, "{{  csrf_token }}")
-});
+console.log(VK.Auth.getLoginStatus(function(response) {
+    return authInfo(response, "{{  csrf_token }}")
+}));
 VK.UI.button('login_button');
 </script>
 
@@ -32,6 +32,7 @@ VK.UI.button('login_button');
           <div id="openapi_actions"><span onclick="doLogout();" onmouseover="addClass(this, 'openapi_actions_hover');" onmouseout="removeClass(this, 'openapi_actions_hover');">Выход</span></div>
         </div>
 </div>
+
 <script language="javascript">
 hide('openapi_block');
 </script>

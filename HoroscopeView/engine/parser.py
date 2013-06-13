@@ -23,6 +23,10 @@ feedparser.registerDateHandler(dateHandler)
 def getDate(parsed_date):
     return date(parsed_date.tm_year, parsed_date.tm_mon, parsed_date.tm_mday)
 
+def removeSignsText(text):
+
+    return text
+
 def getHoroscopesForSign(sign):
     parsed = feedparser.parse(_base_url + sign)
     horoscope_list = []
