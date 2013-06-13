@@ -5,13 +5,14 @@ from HoroscopeView.models import HoroscopeModel
 
 class Horoscope:
 
-    def __init__(self, description, sign, date):
+    def __init__(self, description, sign, date, id = None):
         """
         Class representing a horoscope object
         :param description:
         :param sign:
         :param date:
         """
+        self.id = id
         self.description = description
         self.sign = sign
         self.date = date
@@ -22,4 +23,4 @@ class Horoscope:
 
 
 def fromModel(model):
-    return Horoscope(model.description, model.sign, model.date)
+    return Horoscope(model.description, model.sign, model.date, model.id)

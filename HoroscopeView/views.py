@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from models import User, HoroscopeModel
 from datetime import date, timedelta, datetime
+import random
 from engine.horoscope import Horoscope, fromModel
 from engine.statics import *
 
@@ -21,13 +22,13 @@ def getHoroscopeBySignAndDate(r_sign, r_date):
         return fromModel(res[0])
 
 def getHoroscopesByDate(r_date):
+    print 'rd', r_date
     signs = getSigns()
     res = []
     for sign in signs:
         h = getHoroscopeBySignAndDate(sign, r_date)
         if (h):
             res.append(h)
-    #print len(res)
     return res
 
 def parseDateString(r_date):
@@ -64,6 +65,7 @@ def updateUser(exists, user):
 def handle_get_request(request):
     if request:
         h = getHoroscopesByDate(yesterday())
+        random.shuffle(h)
         c = {'horoscopes': h, 'date': yesterday()}
 
         if request.method == 'GET':
@@ -94,4 +96,25 @@ def login(request):
 
                 return HttpResponse('success_info')
 
+    return HttpResponse('error')
+
+def getHoroscopeById(r_id):
+    return HoroscopeModel.objects.get(id=r_id)
+
+def getUserSignById(user_id):
+    user = User.objects.get(uid=user_id)
+    sign = getSignByDate(parseDate(user.bdate))
+    return sign
+
+def sign(request):
+    if request:
+        if request.method == 'POST':
+            print request.POST.keys()
+            if 'uid' in request.POST and 'horoscope_id' in request.POST:
+                g = 0
+                selected_sign = getHoroscopeById(request.POST['horoscope_id']).sign
+                user_sign = getUserSignById(request.POST['uid'])
+                if selected_sign == user_sign:
+                    g = 1
+                return HttpResponse(str(g) + ';' + selected_sign)
     return HttpResponse('error')

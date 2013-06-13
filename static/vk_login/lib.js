@@ -51,6 +51,7 @@ function onGetInitData(data, csrf) {
       ge('openapi_user').innerHTML = r.me.first_name + ' ' + r.me.last_name;
       ge('openapi_userlink').href = 'http://vk.com/id' + r.me.uid;
       ge('openapi_userphoto').src = r.me.photo;
+      ge('uid').value = r.me.uid
     }
     	hide('login_button');
     	show('openapi_block');
@@ -64,4 +65,15 @@ function onGetInitData(data, csrf) {
   } else {
 	alert('error');
   }
+}
+
+function buttonPressed(value, uid, csrf) {
+
+    if (value && csrf && uid) {
+        var data = { 'horoscope_id': value, 'uid': uid, 'csrfmiddlewaretoken': csrf};
+
+        var args = { type:"POST", url:"/sign", data:data, complete:done};
+        $.ajax(args);
+    }
+
 }

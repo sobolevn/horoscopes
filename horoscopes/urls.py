@@ -8,6 +8,7 @@ from HoroscopeView import views
 urlpatterns = patterns('',
     # Examples:
     url(r'^login$', views.login),
+    url(r'^sign$', views.sign),
         #(r'^$', views.handle_get_request),
     url(r'^$', views.handle_get_request),
     url(r'^static_media/(?P<path>.*)$',

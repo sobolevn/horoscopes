@@ -7,27 +7,25 @@ def getSigns():
     """
     :return:
     """
-    sign = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo',
-            'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces']
+    sign = [u'aries', u'taurus', u'gemini', u'cancer', u'leo', u'virgo',
+            u'libra', u'scorpio', u'sagittarius', u'capricorn', u'aquarius', u'pisces']
     return sign
 
 def getRussianSigns():
     """
     :return:
     """
-    sign = ['овен', 'телец', 'близнецы', 'рак', 'лев',
-            'дева', 'весы', 'скорпион', 'стрелец', 'козерог',
-            'водолей', 'рыбы']
-    return sign
+    keys = getSigns()
+    signs = [u'овен', u'телец', u'близнецы', u'рак', u'лев',
+            u'дева', u'весы', u'скорпион', u'стрелец', u'козерог',
+            u'водолей', u'рыбы']
+    res = {}
+    for i in range(0, len(signs)):
+        res.update({keys[i]: signs[i]})
+    return res
 
 def swap(sign):
-    signs = getSigns()
-    rus = getRussianSigns()
-    if (signs.count(sign)):
-        return rus[signs.count(sign)]
-    if (rus.count(sign)):
-        return signs[rus.count(sign)]
-    return None
+    return getRussianSigns()[sign]
 
 
 def getSignBorders():
