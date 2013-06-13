@@ -46,7 +46,7 @@ hide('openapi_block');
 <div id='horoscopes' class='horoscopes'>
     {% for horoscope in horoscopes %}
         <div class='horoscope_field'>
-            <div>{{ horoscope.description }}</div>
+            <div id="{{ horoscope.id }}_div">{{ horoscope.description }}<span id="{{ horoscope.id }}_h"></span></div>
             <div><input type="submit" name="{{ horoscope.id }}_submit" onclick="buttonPressed(
                     '{{ horoscope.id }}', uid.value, '{{ csrf_token }}')"></div>
         </div>

@@ -116,5 +116,5 @@ def sign(request):
                 user_sign = getUserSignById(request.POST['uid'])
                 if selected_sign == user_sign:
                     g = 1
-                return HttpResponse(str(g) + ';' + selected_sign)
+                return HttpResponse(str(g) + ';' + request.POST['horoscope_id'] + ';' + selected_sign)
     return HttpResponse('error')

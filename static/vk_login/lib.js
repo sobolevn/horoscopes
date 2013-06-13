@@ -14,7 +14,7 @@ function logoutOpenAPI() {
 }
 
 function done(res, status) {
-    alert('done ' + status + ' ' + res.responseText);
+    //alert('done ' + status + ' ' + res.responseText);
   if (status == "success") {
       console.log(res);
   }
@@ -67,12 +67,31 @@ function onGetInitData(data, csrf) {
   }
 }
 
+function checkGuess(res, status) {
+  if (status == "success") {
+      splited = res.responseText.split(';');
+      type = splited[0];
+      selected_id = splited[1];
+      selected_sign = splited[2];
+      ge(selected_id+'_h').innerHTML = " Sign: " + selected_sign;
+      if (type == "1") {
+          ge(selected_id+'_div').style.color = "green";
+      } else {
+          ge(selected_id+'_div').style.color = "red";
+      }
+
+
+  }
+  else {
+  }
+}
+
 function buttonPressed(value, uid, csrf) {
 
     if (value && csrf && uid) {
         var data = { 'horoscope_id': value, 'uid': uid, 'csrfmiddlewaretoken': csrf};
 
-        var args = { type:"POST", url:"/sign", data:data, complete:done};
+        var args = { type:"POST", url:"/sign", data:data, complete:checkGuess};
         $.ajax(args);
     }
 
