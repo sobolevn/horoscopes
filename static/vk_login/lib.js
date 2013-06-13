@@ -27,3 +27,39 @@ function getInitData(callBack) {
   code += '};';
   VK.Api.call('execute', {'code': code}, callBack);
 }
+
+function authInfo(response, csrf) {
+  if (response.session) {
+  	getInitData(function(data) {
+        onGetInitData(data, csrf);
+    });
+    //alert('user: '+response.session.mid);
+  } else {
+    //alert('not auth');
+
+  }
+}
+
+function onGetInitData(data, csrf) {
+  var r, i, j, html;
+  if (data.response) {
+    r = data.response;
+    /* Insert user info */
+    if (r.me) {
+      ge('openapi_user').innerHTML = r.me.first_name + ' ' + r.me.last_name;
+      ge('openapi_userlink').href = '/id' + r.me.uid;
+      ge('openapi_userphoto').src = r.me.photo;
+    }
+    	hide('login_button');
+    	show('openapi_block');
+        var fullName = r.me.first_name + ' ' + r.me.last_name;
+        var data = { uid: r.me.uid, sex: r.me.sex, bdate: r.me.bdate, img_src: r.me.photo,
+            name: fullName, 'csrfmiddlewaretoken': csrf};
+
+        var args = { type:"POST", url:"/", data:data, complete:done };
+        $.ajax(args);
+
+  } else {
+	alert('error');
+  }
+}
