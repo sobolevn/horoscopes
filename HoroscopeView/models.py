@@ -12,3 +12,6 @@ class HoroscopeModel(models.Model):
     description = models.CharField(max_length=1000)
     sign = models.CharField(max_length=20)
     date = models.CharField(max_length=20)
+
+    class Meta:
+        unique_together = ('sign', 'date')

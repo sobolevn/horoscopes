@@ -45,11 +45,11 @@ def login(request):
             return render_to_response('vk_login/login.html', c)
 
         else:
-            print 'post'
             if 'uid' in request.POST and 'name' in request.POST \
                 and 'img_src' in request.POST and 'sex' in request.POST and 'bdate' in request.POST:
                 c.update({'login_val': True})
                 c.update(csrf(request))
+                print 'suc'
                 check = User.objects.filter(uid=request.POST['uid'])
                 if not check:
                     u = User(uid=request.POST['uid'], name=request.POST['name'], sex=request.POST['sex'],
@@ -57,7 +57,7 @@ def login(request):
                     u.save()
                     print 'saved' + u.uid
 
-                return render_to_response('vk_login/login.html', c)
+                return HttpResponse('success') # render_to_response('vk_login/login.html', c)
             else:
                 return HttpResponse('error')
 

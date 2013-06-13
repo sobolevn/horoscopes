@@ -23,25 +23,15 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "horoscopes.settings")
 from HoroscopeView.engine.parser import getAllHoroscopes
 from HoroscopeView.models import HoroscopeModel
 
-def missing(r_date, r_sign):
-    res = HoroscopeModel.objects.filter(sign=r_sign, date=r_date)
-    if res.count() == 0:
-        return True
-    else:
-        return False
-
 def prepareHoroscopes():
     print 'starting to parse'
     horoscopes = getAllHoroscopes()
     for key in horoscopes.keys():
         for horoscope in horoscopes[key]:
-            print horoscope
-            if missing(horoscope.date, horoscope.sign):
-                horoscope.getModel().save()
-                print 'saved'
-            else:
-                print 'already existed'
+            HoroscopeModel.objects.get_or_create(
+                sign=horoscope.sign, date=horoscope.date, description=horoscope.description)
     print 'finished'
+    print HoroscopeModel.objects.all().count()
 
 if __name__ == 'horoscopes.wsgi':
     prepareHoroscopes()

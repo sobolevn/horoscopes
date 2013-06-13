@@ -10,18 +10,48 @@
     
     <script src="static_media/vk_login/lib.js"></script>
   </head>
-  <body>
+<body>
 <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="static_media/vk_login/jquery-1.2.6.min.js"></script>
 <div id="login_button" onclick="VK.Auth.login(authInfo);"></div>
 
 <script language="javascript">
+function authInfo(response) {
+  if (response.session) {
+  	getInitData(onGetInitData);
+    //alert('user: '+response.session.mid);
+  } else {
+    //alert('not auth');
+
+  }
+}
+
+function onGetInitData(data) {
+  var r, i, j, html;
+  if (data.response) {
+    r = data.response;
+    /* Insert user info */
+    if (r.me) {
+      ge('openapi_user').innerHTML = r.me.first_name + ' ' + r.me.last_name;
+      ge('openapi_userlink').href = '/id' + r.me.uid;
+      ge('openapi_userphoto').src = r.me.photo;
+    }
+    	hide('login_button');
+    	show('openapi_block');
+        var fullName = r.me.first_name + ' ' + r.me.last_name;
+        var data = { uid: r.me.uid, sex: r.me.sex, bdate: r.me.bdate, img_src: r.me.photo,
+            name: fullName, 'csrfmiddlewaretoken': "{{  csrf_token }}"};
+
+        var args = { type:"POST", url:"/", data:data, complete:done };
+        $.ajax(args);
+
+  } else {
+	alert('error');
+  }
+}
+
 login();
-{% if not login_val %}
 VK.Auth.getLoginStatus(authInfo);
-{% else %}
-VK.Auth.getLoginStatus(authInfo2);
-{% endif %}
 VK.UI.button('login_button');
 </script>
 
@@ -50,16 +80,6 @@ hide('openapi_block');
         <br>
     {% endfor %}
 </div>
-
-<form class="form2" action="/" method="post" id="form2">{% csrf_token %}
-<input type="hidden" placeholder="login_button" id="uid" name="uid"/>
-<input type="hidden" placeholder="login_button" id="img_src" name="img_src"/>
-<input type="hidden" placeholder="login_button" id="name" name="name"/>
-<input type="hidden" placeholder="login_button" id="sex" name="sex"/>
-<input type="hidden" placeholder="login_button" id="bdate" name="bdate"/>
-</form>
-
-      
 
   </body>
 </html>
