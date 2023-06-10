@@ -47,7 +47,8 @@ def getHoroscopesForSign(sign):
     #print parsed.items()
     for i in parsed.entries:
         date = parseDate(i.published)
-        horoscope_list.append(Horoscope(i.fulltext, sign, date))
+        text = i.fulltext.replace('...', '')
+        horoscope_list.append(Horoscope(text, sign, date))
     return horoscope_list
 
 def getHoroscopeForSignAndDate(sign, date):

@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <base href="//127.0.0.1:8000/"/>
-    <title>Open API sample page</title>
+    <title>Horoscopes Project</title>
     <script type="text/javascript">if (!window.vk) window.vk = {loginscheme: 'https', ip_h: '1cf1aadff2448ca2a2'};</script>
     <script src="//vk.com/js/common.js"></script>
     
